@@ -22,7 +22,27 @@
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form"></div>
+    <div data-view="entry-form">
+      <form>
+        <h2>New Entry</h2>
+        <div class="img-preview">
+          <img src="" alt="User's inputted image">
+        </div>
+        <label for="title">
+          Title
+          <input type="text" name="title" id="title">
+        </label>
+        <label for="img-src">
+          Photo URL
+          <input type="text" name="img-src" id="img-src">
+        </label>
+        <label for="img-notes">
+          Notes
+          <input type="text" name="img-notes" id="img-notes">
+        </label>
+        <button type="submit">SAVE</button>
+      </form>
+    </div>
     <div data-view="entries" class="hidden"></div>
   </main>
   <script src="js/data.js"></script>

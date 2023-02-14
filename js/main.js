@@ -53,7 +53,12 @@ var renderEntry = entry => {
   $entryList.appendChild($entryLi);
 };
 
-renderEntry();
+var domEntries = entries => {
+  for (var entry = 0; entry < entries.length; entry++) {
+    renderEntry(entries[entry]);
+  }
+};
 
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
+document.addEventListener('DOMContentLoaded', domEntries(data.entries));

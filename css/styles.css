@@ -12,12 +12,29 @@ header {
   color: white;
 }
 
+.nav-bar {
+  display: flex;
+  margin: auto 1rem;
+}
+
+.nav-tab {
+  padding-bottom: 0;
+  align-items: flex-end;
+}
+
 main {
   margin: 0;
 }
 
 h3 {
   font-weight: 400;
+  margin: auto 0;
+}
+
+.entries-header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 0.75rem;
 }
 
 img {
@@ -54,16 +71,21 @@ textarea:focus {
   border: 2px solid #562b80;
 }
 
-.submit {
+.submit,
+.new-entry-button {
   margin: 1.5rem 0;
+}
+
+.submit {
   text-align: right;
 }
 
-button {
+button,
+.new-entry-button {
   background-color: #562b80;
   color: white;
   border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border: none;
   font-size: 1rem;
 }

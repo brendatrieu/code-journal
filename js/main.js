@@ -1,9 +1,10 @@
 var $imgPreview = document.querySelector('img');
 var $imgUrlField = document.querySelector('#img-src');
 var $form = document.querySelector('form');
-var $entryList = document.querySelector('ul');
+var $entryList = document.querySelector('.entries-list');
 var $noEntriesTxt = document.querySelector('#no-entries');
-var $divList = document.querySelector('div');
+var $divList = document.querySelectorAll('div[data-view]');
+var $navTabs = document.querySelector('nav');
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -27,6 +28,7 @@ var logNewEntry = event => {
 };
 
 var renderEntry = entry => {
+
   // Create all new elements
   var $entryLi = document.createElement('li');
   var $liDiv = document.createElement('div');
@@ -61,27 +63,29 @@ var domEntries = entries => {
 };
 
 var toggleNoEntries = () => {
-  if ($noEntriesTxt.classList.includes('hidden')) {
+  if ($noEntriesTxt.classList.contains('hidden')) {
     $noEntriesTxt.classList.remove('hidden');
   } else {
     $noEntriesTxt.classList.add('hidden');
   }
 };
 
+toggleNoEntries();
+
 var viewSwap = view => {
   data.view = view;
   for (var divView = 0; divView < $divList.length; divView++) {
-    if ($divList.divView.getAttribute('data-view') === view) {
-      $divList.divView.className = '';
+    if ($divList[divView].getAttribute('data-view') === view) {
+      $divList[divView].classList.remove('hidden');
     } else {
-      $divList.divView.className = 'hidden';
+      $divList[divView].classList.add('hidden');
     }
   }
 };
 
-toggleNoEntries();
-viewSwap();
-
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
 document.addEventListener('DOMContentLoaded', domEntries(data.entries));
+$navTabs.addEventListener('click', event => {
+  viewSwap(event.target.getAttribute('data-view'));
+});

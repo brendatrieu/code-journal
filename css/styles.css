@@ -1,12 +1,19 @@
+body {
+  font-family: Lato, sans-serif;
+  background-color: #f0f0f0;
+}
+
 header {
+  height: 3rem;
+  display: flex;
+  align-items: center;
   font-family: Lato, sans-serif;
   background-color: #562b80;
   color: white;
 }
 
-body {
-  font-family: Lato, sans-serif;
-  background-color: #f0f0f0;
+main {
+  margin: 0;
 }
 
 h3 {
@@ -14,11 +21,21 @@ h3 {
 }
 
 img {
+  width: 100%;
+  object-fit: cover;
+  height: 33vh;
   border-radius: 0.3rem;
 }
 
 label {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
   font-weight: 700;
+}
+
+label.column-full {
+  margin: 0;
 }
 
 input,
@@ -37,6 +54,11 @@ textarea:focus {
   border: 2px solid #562b80;
 }
 
+.submit {
+  margin: 1.5rem 0;
+  text-align: right;
+}
+
 button {
   background-color: #562b80;
   color: white;
@@ -44,4 +66,19 @@ button {
   padding: 0.5rem 1rem;
   border: none;
   font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  h1,
+  h3 {
+    padding: 0 0.75rem;
+  }
+
+  label {
+    margin-top: 0;
+  }
+
+  img {
+    height: 40vh;
+  }
 }

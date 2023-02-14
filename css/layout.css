@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .hidden {
   display: none !important;
 }
@@ -6,6 +11,7 @@
   max-width: 575px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
 }
 
 .row {
@@ -16,6 +22,41 @@
 .column-full,
 .column-half {
   width: 100%;
+}
+
+header {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+main {
+  margin: 0;
+}
+
+form {
+  margin-bottom: 1.5rem;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  height: 33vh;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+label.column-full {
+  margin: 0;
+}
+
+.submit {
+  margin: 1.5rem 0;
+  text-align: right;
 }
 
 @media screen and (min-width: 768px) {
@@ -30,5 +71,19 @@
 
   .column-half {
     width: 50%;
+    margin: 1rem 0;
+  }
+
+  h1,
+  h3 {
+    padding: 0 0.75rem;
+  }
+
+  label {
+    margin-top: 0;
+  }
+
+  img {
+    height: 40vh;
   }
 }

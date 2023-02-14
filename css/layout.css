@@ -6,6 +6,7 @@
   max-width: 575px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
 }
 
 .row {
@@ -30,5 +31,6 @@
 
   .column-half {
     width: 50%;
+    margin: 1rem 0;
   }
 }

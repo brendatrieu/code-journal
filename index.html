@@ -14,14 +14,40 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="container">
+      <h3>Code Journal</h3>
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form"></div>
+    <div data-view="entry-form">
+      <h1>New Entry</h1>
+      <form class="row">
+        <div class="column-half img-preview">
+          <img src="images/placeholder-image-square.jpg" alt="User's inputted image">
+        </div>
+        <div class="column-half">
+          <label for="title">
+            Title
+            <input required type="text" name="title" id="title">
+          </label>
+          <label for="img-src">
+            Photo URL
+            <input required type="text" name="img-src" id="img-src">
+          </label>
+        </div>
+        <label for="img-notes" class="column-full">
+          Notes
+          <textarea required cols="40" rows="6" name="img-notes" id="img-notes"></textarea>
+        </label>
+        <div class="column-full submit">
+          <button type="submit">SAVE</button>
+        </div>
+      </form>
+    </div>
     <div data-view="entries" class="hidden"></div>
   </main>
   <script src="js/data.js"></script>

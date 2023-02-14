@@ -34,10 +34,6 @@ main {
   margin: 0;
 }
 
-form {
-  margin-bottom: 1.5rem;
-}
-
 img {
   width: 100%;
   object-fit: cover;

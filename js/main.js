@@ -1,14 +1,13 @@
 var $imgPreview = document.querySelector('img');
 var $imgUrlField = document.querySelector('#img-src');
-
-$imgUrlField.addEventListener('input', event => {
-  var $imgUrlInput = event.target.value;
-  $imgPreview.setAttribute('src', $imgUrlInput);
-});
-
 var $form = document.querySelector('form');
 
-$form.addEventListener('submit', event => {
+var livePreview = event => {
+  var $imgUrlInput = event.target.value;
+  $imgPreview.setAttribute('src', $imgUrlInput);
+};
+
+var logNewEntry = event => {
   event.preventDefault();
 
   var $newEntry = {
@@ -22,4 +21,7 @@ $form.addEventListener('submit', event => {
   data.entries.push($newEntry);
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-});
+};
+
+$form.addEventListener('submit', logNewEntry);
+$imgUrlField.addEventListener('input', livePreview);

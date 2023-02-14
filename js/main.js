@@ -1,6 +1,8 @@
 var $imgPreview = document.querySelector('img');
 var $imgUrlField = document.querySelector('#img-src');
 var $form = document.querySelector('form');
+var $entryList = document.querySelector('ul');
+var $noEntriesTxt = document.querySelector('#no-entries');
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -24,8 +26,6 @@ var logNewEntry = event => {
 };
 
 var renderEntry = entry => {
-  var $entryList = document.querySelector('ul');
-
   // Create all new elements
   var $entryLi = document.createElement('li');
   var $liDiv = document.createElement('div');
@@ -58,6 +58,16 @@ var domEntries = entries => {
     renderEntry(entries[entry]);
   }
 };
+
+var toggleNoEntries = () => {
+  if ($noEntriesTxt.classList.includes('hidden')) {
+    $noEntriesTxt.classList.remove('hidden');
+  } else {
+    $noEntriesTxt.classList.add('hidden');
+  }
+};
+
+toggleNoEntries();
 
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);

@@ -5,6 +5,7 @@ var $entryList = document.querySelector('.entries-list');
 var $noEntriesTxt = document.querySelector('#no-entries');
 var $divList = document.querySelectorAll('div[data-view]');
 var $navTabs = document.querySelector('nav');
+var $newButton = document.querySelector('.new-entry-button');
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -83,9 +84,12 @@ var viewSwap = view => {
   }
 };
 
+var clickView = event => {
+  viewSwap(event.target.getAttribute('data-view'));
+};
+
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
 document.addEventListener('DOMContentLoaded', domEntries(data.entries));
-$navTabs.addEventListener('click', event => {
-  viewSwap(event.target.getAttribute('data-view'));
-});
+$navTabs.addEventListener('click', clickView);
+$newButton.addEventListener('click', clickView);

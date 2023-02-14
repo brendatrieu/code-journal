@@ -14,12 +14,13 @@ header {
 
 .nav-bar {
   display: flex;
-  margin: auto 1rem;
+  align-items: flex-end;
+  margin: 0;
 }
 
 .nav-tab {
   padding-bottom: 0;
-  align-items: flex-end;
+  margin: 0 1rem 0 0;
 }
 
 main {
@@ -34,7 +35,11 @@ h3 {
 .entries-header {
   display: flex;
   justify-content: space-between;
-  padding-right: 0.75rem;
+}
+
+a,
+button {
+  cursor: pointer;
 }
 
 img {
@@ -115,5 +120,9 @@ h4 {
 
   img {
     height: 40vh;
+  }
+
+  .entries-header {
+    padding-right: 0.75rem;
   }
 }

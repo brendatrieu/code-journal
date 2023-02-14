@@ -3,6 +3,7 @@ var $imgUrlField = document.querySelector('#img-src');
 var $form = document.querySelector('form');
 var $entryList = document.querySelector('ul');
 var $noEntriesTxt = document.querySelector('#no-entries');
+var $divList = document.querySelector('div');
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -67,7 +68,19 @@ var toggleNoEntries = () => {
   }
 };
 
+var viewSwap = view => {
+  data.view = view;
+  for (var divView = 0; divView < $divList.length; divView++) {
+    if ($divList.divView.getAttribute('data-view') === view) {
+      $divList.divView.className = '';
+    } else {
+      $divList.divView.className = 'hidden';
+    }
+  }
+};
+
 toggleNoEntries();
+viewSwap();
 
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);

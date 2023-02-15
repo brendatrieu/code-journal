@@ -7,6 +7,7 @@ var $divList = document.querySelectorAll('div[data-view]');
 var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
+var $delAnchor = document.querySelector('#del-entry');
 var editEntryIndex = 0;
 
 var livePreview = event => {
@@ -48,6 +49,7 @@ var logNewEntry = event => {
     $entryLiNodes[editEntryIndex].replaceWith(renderEntry($updatedEntry));
     $entryFormHeader.textContent = 'New Entry';
     data.editing = null;
+    $delAnchor.className = 'invisible';
   }
   viewSwap('entries');
   toggleNoEntries(data.entries);
@@ -116,6 +118,13 @@ var viewSwap = view => {
       $divList[divView].classList.add('hidden');
     }
   }
+  if ($entryFormHeader.textContent === 'Edit Entry') {
+    $form.reset();
+    $entryFormHeader.textContent = 'New Entry';
+    data.editing = null;
+    $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $delAnchor.className = 'invisible';
+  }
 };
 
 var clickView = event => {
@@ -145,6 +154,7 @@ var editEntry = event => {
   $form.elements['img-notes'].value = data.editing.notes;
   $imgPreview.setAttribute('src', data.editing.photoUrl);
   $entryFormHeader.textContent = 'Edit Entry';
+  $delAnchor.className = '';
 };
 
 $form.addEventListener('submit', logNewEntry);

@@ -22,12 +22,12 @@ var logNewEntry = event => {
     entryId: data.nextEntryId
   };
 
-  data.nextEntryId++;
   data.entries.unshift($newEntry);
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 
   var $newDom = renderEntry($newEntry);
+  data.nextEntryId++;
   $entryList.prepend($newDom);
   viewSwap('entries');
 
@@ -50,6 +50,7 @@ var renderEntry = entry => {
 
   // Assign classes and content to elements
   $liDiv.className = 'row';
+  $entryLi.setAttribute('data-entry-id', entry.entryId);
   $imgDiv.className = 'column-half';
   $imgEl.setAttribute('src', entry.photoUrl);
   $textDiv.className = 'column-half';

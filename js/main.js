@@ -107,7 +107,15 @@ var editEntry = event => {
   if (event.target.tagName !== 'I') {
     return;
   }
+
   viewSwap('entry-form');
+
+  for (var savedEntry = 0; savedEntry < data.entries.length; savedEntry++) {
+    if (JSON.stringify(data.entries[savedEntry].entryId) === event.target.closest('li').getAttribute('data-entry-id')) {
+      data.editing = { ...data.entries[savedEntry] };
+    }
+  }
+
 };
 
 $form.addEventListener('submit', logNewEntry);

@@ -6,6 +6,7 @@ var $noEntriesTxt = document.querySelector('#no-entries');
 var $divList = document.querySelectorAll('div[data-view]');
 var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
+var $entryFormHeader = document.querySelector('#entry-form-header');
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -116,6 +117,11 @@ var editEntry = event => {
     }
   }
 
+  $form.elements.title.value = data.editing.title;
+  $form.elements['img-src'].value = data.editing.photoUrl;
+  $form.elements['img-notes'].value = data.editing.notes;
+  $imgPreview.setAttribute('src', data.editing.photoUrl);
+  $entryFormHeader.textContent = 'Edit Entry';
 };
 
 $form.addEventListener('submit', logNewEntry);

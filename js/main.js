@@ -26,6 +26,15 @@ var logNewEntry = event => {
   data.entries.unshift($newEntry);
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
+
+  var $newDom = renderEntry($newEntry);
+  $entryList.prepend($newDom);
+  viewSwap('entries');
+
+  if (!data.entries) {
+    toggleNoEntries();
+  }
+
 };
 
 var renderEntry = entry => {
@@ -54,7 +63,8 @@ var renderEntry = entry => {
   $liDiv.appendChild($imgDiv);
   $liDiv.appendChild($textDiv);
   $entryLi.appendChild($liDiv);
-  $entryList.appendChild($entryLi);
+
+  return $entryLi;
 };
 
 var domEntries = entries => {

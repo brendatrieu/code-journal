@@ -31,9 +31,7 @@ var logNewEntry = event => {
   $entryList.prepend($newDom);
   viewSwap('entries');
 
-  if (!data.entries) {
-    toggleNoEntries();
-  }
+  toggleNoEntries(data.entries);
 
 };
 
@@ -69,19 +67,21 @@ var renderEntry = entry => {
 
 var domEntries = entries => {
   for (var entry = 0; entry < entries.length; entry++) {
-    renderEntry(entries[entry]);
+    $entryList.append(renderEntry(entries[entry]));
   }
+
+  viewSwap(data.view);
+
+  toggleNoEntries(data.entries);
 };
 
-var toggleNoEntries = () => {
-  if ($noEntriesTxt.classList.contains('hidden')) {
-    $noEntriesTxt.classList.remove('hidden');
-  } else {
+var toggleNoEntries = entries => {
+  if (entries.length > 0) {
     $noEntriesTxt.classList.add('hidden');
+  } else {
+    $noEntriesTxt.classList.remove('hidden');
   }
 };
-
-toggleNoEntries();
 
 var viewSwap = view => {
   data.view = view;

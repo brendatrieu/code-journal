@@ -16,23 +16,26 @@ var livePreview = event => {
 var logNewEntry = event => {
   event.preventDefault();
 
-  var $newEntry = {
-    title: $form.elements.title.value,
-    photoUrl: $form.elements['img-src'].value,
-    notes: $form.elements['img-notes'].value,
-    entryId: data.nextEntryId
-  };
+  if (!data.editing) {
+    var $newEntry = {
+      title: $form.elements.title.value,
+      photoUrl: $form.elements['img-src'].value,
+      notes: $form.elements['img-notes'].value,
+      entryId: data.nextEntryId
+    };
 
-  data.entries.unshift($newEntry);
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $form.reset();
+    data.entries.unshift($newEntry);
+    $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $form.reset();
 
-  var $newDom = renderEntry($newEntry);
+    var $newDom = renderEntry($newEntry);
 
-  data.nextEntryId++;
-  $entryList.prepend($newDom);
-  viewSwap('entries');
-  toggleNoEntries(data.entries);
+    data.nextEntryId++;
+    $entryList.prepend($newDom);
+    viewSwap('entries');
+    toggleNoEntries(data.entries);
+  }
+
 };
 
 var renderEntry = entry => {

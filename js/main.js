@@ -119,6 +119,10 @@ var viewSwap = view => {
 };
 
 var clickView = event => {
+  if (!event.target.getAttribute('data-view')) {
+    return;
+  }
+
   viewSwap(event.target.getAttribute('data-view'));
 };
 

@@ -7,11 +7,7 @@ var $divList = document.querySelectorAll('div[data-view]');
 var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
-
-// Form value variables
-var $formTitleVal = $form.elements.title.value;
-var $formSrcVal = $form.elements['img-src'].value;
-var $formNotesVal = $form.elements['img-notes'].value;
+var editEntryIndex = 0;
 
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
@@ -23,9 +19,9 @@ var logNewEntry = event => {
 
   if (!data.editing) {
     var $newEntry = {
-      title: $formTitleVal,
-      photoUrl: $formSrcVal,
-      notes: $formNotesVal,
+      title: $form.elements.title.value,
+      photoUrl: $form.elements['img-src'].value,
+      notes: $form.elements['img-notes'].value,
       entryId: data.nextEntryId
     };
 
@@ -37,17 +33,24 @@ var logNewEntry = event => {
 
     data.nextEntryId++;
     $entryList.prepend($newDom);
-    viewSwap('entries');
-    toggleNoEntries(data.entries);
   } else {
     var $updatedEntry = {
-      title: $formTitleVal,
-      photoUrl: $formSrcVal,
-      notes: $formNotesVal,
+      title: $form.elements.title.value,
+      photoUrl: $form.elements['img-src'].value,
+      notes: $form.elements['img-notes'].value,
       entryId: data.editing.entryId
     };
-    return $updatedEntry;
+
+    data.entries.splice(editEntryIndex, 1, $updatedEntry);
+
+    var $entryLiNodes = document.querySelectorAll('li[data-entry-id]');
+
+    $entryLiNodes[editEntryIndex].replaceWith(renderEntry($updatedEntry));
+    $entryFormHeader.textContent = 'New Entry';
+    data.editing = null;
   }
+  viewSwap('entries');
+  toggleNoEntries(data.entries);
 };
 
 var renderEntry = entry => {
@@ -63,7 +66,7 @@ var renderEntry = entry => {
   var $editIcon = document.createElement('i');
   var $titleDiv = document.createElement('div');
 
-  // Assign classes and content to elements
+  // Assign attributes and content to elements
   $liDiv.className = 'row';
   $entryLi.setAttribute('data-entry-id', entry.entryId);
   $imgDiv.className = 'column-half';
@@ -129,12 +132,13 @@ var editEntry = event => {
   for (var savedEntry = 0; savedEntry < data.entries.length; savedEntry++) {
     if (JSON.stringify(data.entries[savedEntry].entryId) === event.target.closest('li').getAttribute('data-entry-id')) {
       data.editing = { ...data.entries[savedEntry] };
+      editEntryIndex = savedEntry;
     }
   }
 
-  $formTitleVal = data.editing.title;
-  $formSrcVal = data.editing.photoUrl;
-  $formNotesVal = data.editing.notes;
+  $form.elements.title.value = data.editing.title;
+  $form.elements['img-src'].value = data.editing.photoUrl;
+  $form.elements['img-notes'].value = data.editing.notes;
   $imgPreview.setAttribute('src', data.editing.photoUrl);
   $entryFormHeader.textContent = 'Edit Entry';
 };

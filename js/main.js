@@ -27,12 +27,11 @@ var logNewEntry = event => {
   $form.reset();
 
   var $newDom = renderEntry($newEntry);
+
   data.nextEntryId++;
   $entryList.prepend($newDom);
   viewSwap('entries');
-
   toggleNoEntries(data.entries);
-
 };
 
 var renderEntry = entry => {
@@ -78,7 +77,6 @@ var domEntries = entries => {
   }
 
   viewSwap(data.view);
-
   toggleNoEntries(data.entries);
 };
 
@@ -105,8 +103,16 @@ var clickView = event => {
   viewSwap(event.target.getAttribute('data-view'));
 };
 
+var editEntry = event => {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+  viewSwap('entry-form');
+};
+
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
 document.addEventListener('DOMContentLoaded', domEntries(data.entries));
 $navTabs.addEventListener('click', clickView);
 $newButton.addEventListener('click', clickView);
+$entryList.addEventListener('click', editEntry);

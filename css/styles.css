@@ -31,9 +31,23 @@ h3 {
   margin: auto 0;
 }
 
-.entries-header {
+.entries-header,
+.title-header {
   display: flex;
   justify-content: space-between;
+}
+
+.entries-header {
+  margin: 0;
+}
+
+.new-entry-button {
+  height: 100%;
+  margin: auto 0;
+}
+
+.title-header {
+  margin-top: 0.5rem;
 }
 
 a,
@@ -46,6 +60,11 @@ img {
   object-fit: cover;
   height: 33vh;
   border-radius: 0.3rem;
+}
+
+.fa-solid {
+  color: #562b80;
+  margin: auto 0;
 }
 
 label {
@@ -75,13 +94,9 @@ textarea:focus {
   border: 2px solid #562b80;
 }
 
-.submit,
-.new-entry-button {
-  margin: 1.5rem 0;
-}
-
 .submit {
   text-align: right;
+  margin: 1.5rem 0;
 }
 
 button,

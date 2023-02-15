@@ -45,18 +45,24 @@ var renderEntry = entry => {
   var $textDiv = document.createElement('div');
   var $imgTitle = document.createElement('h4');
   var $imgNotes = document.createElement('p');
+  var $editIcon = document.createElement('i');
+  var $titleDiv = document.createElement('div');
 
   // Assign classes and content to elements
   $liDiv.className = 'row';
   $imgDiv.className = 'column-half';
   $imgEl.setAttribute('src', entry.photoUrl);
   $textDiv.className = 'column-half';
+  $titleDiv.className = 'title-header';
   $imgTitle.textContent = entry.title;
+  $editIcon.className = 'fa-solid fa-pen';
   $imgNotes.textContent = entry.notes;
 
   // Append elements
   $imgDiv.appendChild($imgEl);
-  $textDiv.appendChild($imgTitle);
+  $titleDiv.appendChild($imgTitle);
+  $titleDiv.appendChild($editIcon);
+  $textDiv.appendChild($titleDiv);
   $textDiv.appendChild($imgNotes);
   $liDiv.appendChild($imgDiv);
   $liDiv.appendChild($textDiv);

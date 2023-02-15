@@ -8,6 +8,11 @@ var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
 
+// Form value variables
+var $formTitleVal = $form.elements.title.value;
+var $formSrcVal = $form.elements['img-src'].value;
+var $formNotesVal = $form.elements['img-notes'].value;
+
 var livePreview = event => {
   var $imgUrlInput = event.target.value;
   $imgPreview.setAttribute('src', $imgUrlInput);
@@ -18,9 +23,9 @@ var logNewEntry = event => {
 
   if (!data.editing) {
     var $newEntry = {
-      title: $form.elements.title.value,
-      photoUrl: $form.elements['img-src'].value,
-      notes: $form.elements['img-notes'].value,
+      title: $formTitleVal,
+      photoUrl: $formSrcVal,
+      notes: $formNotesVal,
       entryId: data.nextEntryId
     };
 
@@ -34,8 +39,15 @@ var logNewEntry = event => {
     $entryList.prepend($newDom);
     viewSwap('entries');
     toggleNoEntries(data.entries);
+  } else {
+    var $updatedEntry = {
+      title: $formTitleVal,
+      photoUrl: $formSrcVal,
+      notes: $formNotesVal,
+      entryId: data.editing.entryId
+    };
+    return $updatedEntry;
   }
-
 };
 
 var renderEntry = entry => {
@@ -120,9 +132,9 @@ var editEntry = event => {
     }
   }
 
-  $form.elements.title.value = data.editing.title;
-  $form.elements['img-src'].value = data.editing.photoUrl;
-  $form.elements['img-notes'].value = data.editing.notes;
+  $formTitleVal = data.editing.title;
+  $formSrcVal = data.editing.photoUrl;
+  $formNotesVal = data.editing.notes;
   $imgPreview.setAttribute('src', data.editing.photoUrl);
   $entryFormHeader.textContent = 'Edit Entry';
 };

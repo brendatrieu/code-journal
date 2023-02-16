@@ -9,7 +9,8 @@ var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
 var $delAnchor = document.querySelector('#del-entry');
 var $deleteModal = document.querySelector('#delete-modal');
-var $cancelModal = document.querySelector('#cancel-button');
+var $cancelButton = document.querySelector('#cancel-button');
+var $confirmButton = document.querySelector('#confirm-button');
 var editEntryIndex = 0;
 
 var livePreview = event => {
@@ -120,6 +121,8 @@ var viewSwap = view => {
       $divList[divView].classList.add('hidden');
     }
   }
+
+  // Reset form if the user leaves the edit page without saving
   if ($entryFormHeader.textContent === 'Edit Entry') {
     $form.reset();
     $entryFormHeader.textContent = 'New Entry';
@@ -167,6 +170,17 @@ var toggleDelModal = event => {
   }
 };
 
+var delEntry = event => {
+  var $entryLiNodes = document.querySelectorAll('li[data-entry-id]');
+  var $currentLi = $entryLiNodes[editEntryIndex];
+
+  data.entries.splice(editEntryIndex, 1);
+  $entryList.removeChild($currentLi);
+  toggleNoEntries(data.entries);
+  toggleDelModal(event);
+  viewSwap('entries');
+};
+
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
 document.addEventListener('DOMContentLoaded', domEntries(data.entries));
@@ -174,4 +188,5 @@ $navTabs.addEventListener('click', clickView);
 $newButton.addEventListener('click', clickView);
 $entryList.addEventListener('click', editEntry);
 $delAnchor.addEventListener('click', toggleDelModal);
-$cancelModal.addEventListener('click', toggleDelModal);
+$cancelButton.addEventListener('click', toggleDelModal);
+$confirmButton.addEventListener('click', delEntry);

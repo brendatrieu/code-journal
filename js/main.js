@@ -7,6 +7,10 @@ var $divList = document.querySelectorAll('div[data-view]');
 var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
+var $delAnchor = document.querySelector('#del-entry');
+var $deleteModal = document.querySelector('#delete-modal');
+var $cancelButton = document.querySelector('#cancel-button');
+var $confirmButton = document.querySelector('#confirm-button');
 var editEntryIndex = 0;
 
 var livePreview = event => {
@@ -48,6 +52,7 @@ var logNewEntry = event => {
     $entryLiNodes[editEntryIndex].replaceWith(renderEntry($updatedEntry));
     $entryFormHeader.textContent = 'New Entry';
     data.editing = null;
+    $delAnchor.className = 'invisible';
   }
   viewSwap('entries');
   toggleNoEntries(data.entries);
@@ -116,6 +121,15 @@ var viewSwap = view => {
       $divList[divView].classList.add('hidden');
     }
   }
+
+  // Reset form if the user leaves the edit page without saving
+  if ($entryFormHeader.textContent === 'Edit Entry') {
+    $form.reset();
+    $entryFormHeader.textContent = 'New Entry';
+    data.editing = null;
+    $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $delAnchor.className = 'invisible';
+  }
 };
 
 var clickView = event => {
@@ -145,6 +159,26 @@ var editEntry = event => {
   $form.elements['img-notes'].value = data.editing.notes;
   $imgPreview.setAttribute('src', data.editing.photoUrl);
   $entryFormHeader.textContent = 'Edit Entry';
+  $delAnchor.className = '';
+};
+
+var toggleDelModal = event => {
+  if (event.target.textContent === 'Delete Entry') {
+    $deleteModal.className = '';
+  } else {
+    $deleteModal.className = 'hidden';
+  }
+};
+
+var delEntry = event => {
+  var $entryLiNodes = document.querySelectorAll('li[data-entry-id]');
+  var $currentLi = $entryLiNodes[editEntryIndex];
+
+  data.entries.splice(editEntryIndex, 1);
+  $entryList.removeChild($currentLi);
+  toggleNoEntries(data.entries);
+  toggleDelModal(event);
+  viewSwap('entries');
 };
 
 $form.addEventListener('submit', logNewEntry);
@@ -153,3 +187,6 @@ document.addEventListener('DOMContentLoaded', domEntries(data.entries));
 $navTabs.addEventListener('click', clickView);
 $newButton.addEventListener('click', clickView);
 $entryList.addEventListener('click', editEntry);
+$delAnchor.addEventListener('click', toggleDelModal);
+$cancelButton.addEventListener('click', toggleDelModal);
+$confirmButton.addEventListener('click', delEntry);

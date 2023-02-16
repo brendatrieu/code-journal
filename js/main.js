@@ -9,6 +9,7 @@ var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
 var $delAnchor = document.querySelector('#del-entry');
 var $deleteModal = document.querySelector('#delete-modal');
+var $cancelModal = document.querySelector('#cancel-button');
 var editEntryIndex = 0;
 
 var livePreview = event => {
@@ -158,8 +159,12 @@ var editEntry = event => {
   $delAnchor.className = '';
 };
 
-var delModal = () => {
-  $deleteModal.className = '';
+var toggleDelModal = event => {
+  if (event.target.textContent === 'Delete Entry') {
+    $deleteModal.className = '';
+  } else {
+    $deleteModal.className = 'hidden';
+  }
 };
 
 $form.addEventListener('submit', logNewEntry);
@@ -168,4 +173,5 @@ document.addEventListener('DOMContentLoaded', domEntries(data.entries));
 $navTabs.addEventListener('click', clickView);
 $newButton.addEventListener('click', clickView);
 $entryList.addEventListener('click', editEntry);
-$delAnchor.addEventListener('click', delModal);
+$delAnchor.addEventListener('click', toggleDelModal);
+$cancelModal.addEventListener('click', toggleDelModal);

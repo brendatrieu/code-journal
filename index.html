@@ -48,7 +48,18 @@
         </label>
         <div class="column-full submit">
           <a class="invisible" id="del-entry">Delete Entry</a>
-          <button type="submit">SAVE</button>
+          <button class="std-button" type="submit">SAVE</button>
+        </div>
+        <div class="hidden" id="delete-modal">
+          <div class="" id="confirm-msg">
+            <p>
+              Are you sure you want to delete this entry?
+            </p>
+            <div id="confirm-buttons">
+              <button id="cancel-button" type="button">CANCEL</button>
+              <button id="confirm-button" type="button">CONFIRM</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

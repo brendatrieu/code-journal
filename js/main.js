@@ -8,6 +8,7 @@ var $navTabs = document.querySelector('nav');
 var $newButton = document.querySelector('.new-entry-button');
 var $entryFormHeader = document.querySelector('#entry-form-header');
 var $delAnchor = document.querySelector('#del-entry');
+var $deleteModal = document.querySelector('#delete-modal');
 var editEntryIndex = 0;
 
 var livePreview = event => {
@@ -157,9 +158,14 @@ var editEntry = event => {
   $delAnchor.className = '';
 };
 
+var delModal = () => {
+  $deleteModal.className = '';
+};
+
 $form.addEventListener('submit', logNewEntry);
 $imgUrlField.addEventListener('input', livePreview);
 document.addEventListener('DOMContentLoaded', domEntries(data.entries));
 $navTabs.addEventListener('click', clickView);
 $newButton.addEventListener('click', clickView);
 $entryList.addEventListener('click', editEntry);
+$delAnchor.addEventListener('click', delModal);
